@@ -1,19 +1,20 @@
 #include "Pieza.hh"
+#include "Tablero.hh"
 
 Pieza::Pieza(bool blanca){
-    pieza_blanca = blanca;
+    color = blanca;
 }
 
 Pieza::Pieza(Pieza *p2){
-    pieza_blanca = p2->pieza_blanca;
+    color = p2->color;
 }
 
 Pieza::Pieza(){
-    pieza_blanca = true;
+    color = true;
 }
 
 char Pieza::print_pieza(){
-    if(pieza_blanca) std::cout<<"\033[7m";
+    if(color==BLANCA) std::cout<<"\033[7m";
     else std::cout<<"\033[34m";
     return print();
 }

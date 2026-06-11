@@ -32,25 +32,25 @@ rebuild: clean all
 Structs_y_Funciones.o: Structs_y_Funciones.cc Structs_y_Funciones.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Pieza.o: Pieza.cc Pieza.hh Structs_y_Funciones.hh
+Pieza.o: Pieza.cc Pieza.hh Structs_y_Funciones.hh Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Peon.o: Peon.cc Peon.hh Pieza.hh
+Peon.o: Peon.cc Peon.hh Pieza.hh Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Torre.o: Torre.cc Torre.hh Pieza.hh
+Torre.o: Torre.cc Torre.hh Pieza.hh Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Caballo.o: Caballo.cc Caballo.hh Pieza.hh
+Caballo.o: Caballo.cc Caballo.hh Pieza.hh Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Alfil.o: Alfil.cc Alfil.hh Pieza.hh
+Alfil.o: Alfil.cc Alfil.hh Pieza.hh Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Rei.o: Rei.cc Rei.hh Pieza.hh
+Rei.o: Rei.cc Rei.hh Pieza.hh Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Dama.o: Dama.cc Dama.hh Pieza.hh
+Dama.o: Dama.cc Dama.hh Pieza.hh Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
 Tablero.o: Tablero.cc Tablero.hh Peon.hh Torre.hh Caballo.hh Alfil.hh Dama.hh Rei.hh Pieza.hh

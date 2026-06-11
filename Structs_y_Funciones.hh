@@ -29,6 +29,31 @@ struct Pos {
     }
 
     Pos():x(0),y(0){}
+
+    bool operator<(const Pos &p) const{
+        if(x==p.x) return y<p.y;
+        return x<p.x;
+    }
+
+    bool operator>(const Pos &p)const {
+        if(x==p.x) return y>p.y;
+        return x>p.x;
+    }
+
+    bool operator==(const Pos &p)const {
+        return y==p.y and x==p.x;
+    }
+
+    Pos operator+(const Pos &p)const {
+        return Pos(x+p.x, y+p.y);
+    }
+
+    Pos operator=(const Pos &p){
+        x=p.x;
+        y=p.y;
+        return p;
+    }
+
 };
 
 std::ostream& operator<<(std::ostream& os, const Pos& p);

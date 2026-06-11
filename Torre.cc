@@ -1,5 +1,27 @@
 #include "Torre.hh"
+#include "Tablero.hh"
 
 Torre::Torre (bool blanca):Pieza(blanca){}
 Torre::Torre (Pieza *p2):Pieza(p2){}
 Torre::Torre ():Pieza(){}
+
+void Torre::obtener_movimientos_posibles(std::set<Pos> &result, Pos p, Tablero *t){
+    
+    result.clear();
+
+    for(auto mov:vector_mov){
+        Pos aux = p;
+        bool posible = true;
+        while(posible){
+            aux=aux+mov;
+            if(pos_aceptable(aux.x, aux.y) and !t->ocupado(aux)) result.insert(aux);
+            else posible = false;
+        }
+        if(pos_aceptable(aux.x, aux.y) and t->ocupado_equipo(aux, !color)) result.insert(aux);
+    }
+}
+
+bool Torre::mover(Pos original, Pos nueva){
+    Pos mov(nueva.x-original.x, nueva.y-original.y);
+    return mov.x==0 || mov.y == 0;
+}

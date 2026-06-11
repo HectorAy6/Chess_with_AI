@@ -20,8 +20,19 @@ class Tablero {
         void jugar_partida();
         void reset();
 
+        bool ocupado(Pos p){
+            if(tablero_piezas[p.x][p.y]==nullptr) return false;
+            return true;
+        }
+
+        bool ocupado_equipo(Pos p, bool equipo){
+            if(tablero_piezas[p.x][p.y]==nullptr) return false;
+            if(tablero_piezas[p.x][p.y]->equipo()==equipo) return true;
+            return false;
+        }
+
         
-    private:
+    protected:
         mat tablero_piezas = mat(size_tablero);
 
         void print();
