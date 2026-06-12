@@ -47,11 +47,13 @@ class Tablero {
         #define SIGUIENTE_RONDA 0
         #define TABLAS 1
         #define JAQUE_MATE 2  
+        #define RENDIRSE 3
 
         mat tablero_piezas = mat(size_tablero);
         std::set<Pos> Movimientos_pieza_seleccionada;
-        Pos Rei_blanco, Rei_negro, posicion_pieza_actual;
-        bool jaqueBlanco, jaqueNegro;
+        std::set<char> comandos_validos = {'s', 'e', 'm', 'd', 'S', 'E', 'M', 'D'};
+        Pos Rei_blanco, Rei_negro, posicion_pieza_actual, nueva_posicion_pieza;
+        bool jaqueBlanco, jaqueNegro, piezaSeleccionada;
 
         void print();
 
@@ -66,7 +68,9 @@ class Tablero {
         //Funcion que juega una ronda del quipo seleccionado, en caso de matar el Rei devuelve True
         int movimiento(bool equipo);
 
-        void demanarPos(int &fila, int &columna);
+        bool pedirComanda(bool equipo);
+
+        void pedirPos(Pos &p);
 
         bool tiene_movimientos(bool equipo);
 

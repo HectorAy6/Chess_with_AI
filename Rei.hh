@@ -16,7 +16,6 @@ class Rei: public Pieza{
         virtual void obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t);
         
     private:
-        virtual bool mover(Pos original, Pos nueva);
 
         std::set<Pos> movimientos = {Pos(1,1), Pos(-1,1), Pos(1,-1), Pos(-1,-1), Pos(1,0), Pos(0,1), Pos(-1,0), Pos(0,-1)};
 };

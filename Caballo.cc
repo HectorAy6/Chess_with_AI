@@ -24,11 +24,3 @@ void Caballo::obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t){
         }
     }
 }
-
-bool Caballo::mover(Pos original, Pos nueva){
-    Pos mov(nueva.x-original.x, nueva.y-original.y);
-    if(movimientos_validos.find(mov)!= movimientos_validos.end()){
-        return true;
-    }
-    return false;
-}

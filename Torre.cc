@@ -36,8 +36,3 @@ void Torre::obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t){
         if(pos_aceptable(aux.x, aux.y) and t->ocupado_equipo(aux, !color) and !t->hay_jaque_mover_pieza(p, aux)) result.insert(aux);
     }
 }
-
-bool Torre::mover(Pos original, Pos nueva){
-    Pos mov(nueva.x-original.x, nueva.y-original.y);
-    return mov.x==0 || mov.y == 0;
-}

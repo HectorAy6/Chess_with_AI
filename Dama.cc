@@ -34,9 +34,3 @@ void Dama::obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t){
     }
 
 }
-
-
-bool Dama::mover(Pos original, Pos nueva){
-    Pos mov(nueva.x-original.x, nueva.y-original.y);
-    return mov.x==0 || mov.y == 0 ||abs(mov.x)==abs(mov.y);
-}

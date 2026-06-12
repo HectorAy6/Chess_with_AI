@@ -22,10 +22,3 @@ void Rei::obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t){
         if(pos_aceptable(aux.x, aux.y) and !t->ocupado_equipo(aux, color) and !t->hay_jaque_mover_pieza(p, aux)) result.insert(aux);
     }
 }
-
-
-bool Rei::mover(Pos original, Pos nueva){
-    Pos mov(nueva.x-original.x, nueva.y-original.y);
-    return abs(mov.x)<2 and abs(mov.y)<2;
-    
-}

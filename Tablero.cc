@@ -28,49 +28,20 @@ void Tablero::print(){
 
 int Tablero::movimiento(bool equipo){
 
-    Pos pos_original, nueva_pos;
-    bool acceptable = false;
-    std::set<Pos> Movimientos_pos;
+    while (!pedirComanda(equipo));
     
-    while (!acceptable)
-    {
-        std::cout << "Elige pieza para mover:";
-        
-        demanarPos(pos_original.x, pos_original.y);
+    if(!piezaSeleccionada) return RENDIRSE;
 
-        if(pos_aceptable(pos_original.x, pos_original.y)){
-            if(tablero_piezas[pos_original.x][pos_original.y]==nullptr) std::cout << "La posicion no esta ocupada" << std::endl;
-            else if(tablero_piezas[pos_original.x][pos_original.y]->equipo()!=equipo) std::cout << "La posicion esta ocupada por pieza rival" << std::endl;
-            else {
-                tablero_piezas[pos_original.x][pos_original.y]->obtener_movimientos_posibles(Movimientos_pos, pos_original, this);
-                if(Movimientos_pos.size()==0) std::cout << "La pieza no tiene movimientos validos" << std::endl;
-                else acceptable = true;
-            }
-        }else std::cout << "La posicion no existeix" << std::endl;
-        
-    }
-    
-    acceptable = false;
+    if(posicion_pieza_actual==Rei_blanco) Rei_blanco = nueva_posicion_pieza;
+    else if (posicion_pieza_actual==Rei_negro) Rei_negro = nueva_posicion_pieza;
 
-    while (!acceptable)
-    {
-        std::cout << "Elige posicio a donde mover:";
-        
-        demanarPos(nueva_pos.x, nueva_pos.y);
-        if(Movimientos_pos.find(nueva_pos)==Movimientos_pos.end()) std::cout << "La pieza no sepuede mover ahi" << std::endl;
-        else acceptable = true;
-        
-    }
+    tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->pieza_movida();
 
-    if(pos_original==Rei_blanco) Rei_blanco = nueva_pos;
-    else if (pos_original==Rei_negro) Rei_negro = nueva_pos;
-
-    tablero_piezas[nueva_pos.x][nueva_pos.y] = tablero_piezas[pos_original.x][pos_original.y];;
-    tablero_piezas[pos_original.x][pos_original.y] = nullptr;
+    tablero_piezas[nueva_posicion_pieza.x][nueva_posicion_pieza.y] = tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y];
+    tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = nullptr;
 
 
     calculo_Jaque(!equipo);
-    std::cout << "CaLCULO BIEN JAQUE MATE" << std:: endl;
     if(tiene_movimientos(!equipo)) return SIGUIENTE_RONDA;
     if(hay_jaque(!equipo)) return JAQUE_MATE;
     return TABLAS;
@@ -79,19 +50,20 @@ int Tablero::movimiento(bool equipo){
 
 void Tablero::jugar_partida(){
     int acabado = SIGUIENTE_RONDA;
-    bool equipo = BLANCA;
+    bool equipo = NEGRA;
     
     print();
 
     while(acabado==SIGUIENTE_RONDA){
+        equipo= !equipo;
         acabado = movimiento(equipo);
         print();
-
-        equipo= !equipo;
     }
     if(acabado==TABLAS) std::cout << "TABLAS";
-    else if(equipo==BLANCA) std::cout << "JAQUE MATE GANADOR NEGRO";
-    else std::cout << "JAQUE MATE GANADOR BLANCO";
+    else if(acabado==RENDIRSE && equipo==BLANCA) std::cout << "BLANCO SE RINDE, GANA NEGRO";
+    else if(acabado==RENDIRSE && equipo==NEGRA) std::cout << "NEGRO SE RINDE, GANA BLANCO";
+    else if(acabado==JAQUE_MATE && equipo==BLANCA) std::cout << "JAQUE MATE GANADOR BLANCO";
+    else if(acabado==JAQUE_MATE && equipo==NEGRA) std::cout << "JAQUE MATE GANADOR NEGRO";
 
     std::cout << std::endl;
 }
@@ -136,21 +108,67 @@ void Tablero::reset(){
     jaqueNegro = false;
 }
 
-void Tablero::demanarPos(int &fila, int &columna){
+bool Tablero::pedirComanda(bool equipo){
 
-    char columna_letra;
+    char comando;
 
-    while (!(std::cin >> columna_letra >> fila)) {
-        std::cout << "Entrada invalida. Introduce una letra y un numero: " << std::endl;
+    std::cout << "Introducir comando:" << std::endl;
+    while (!(std::cin >> comando) || comandos_validos.find(comando)==comandos_validos.end()) {
+        std::cout << "Entrada invalida. Introduce una letra para indicar que hacer: " << std::endl;
+        std::cout << " 's/S' : seleccionar pieza " << std::endl;
+        std::cout << " 'm/M' : mover seleccionada pieza " << std::endl;
+        std::cout << " 'd/D' : quitar seleccion pieza " << std::endl;
+        std::cout << " 'e/E' : acabar partida " << std::endl;
         
         std::cin.clear(); 
         std::cin.ignore(1000, '\n');
     }
 
-    if(columna_letra>'H') columna = columna_letra- 'a';
-    else columna = columna_letra-'A';
+    if(comando=='S' || comando == 's'){
+        pedirPos(posicion_pieza_actual);
+        piezaSeleccionada = false;
+        if(pos_aceptable(posicion_pieza_actual.x, posicion_pieza_actual.y)){
+            if(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]==nullptr) std::cout << "La posicion no esta ocupada" << std::endl;
+            else if(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->equipo()!=equipo) std::cout << "La posicion esta ocupada por pieza rival" << std::endl;
+            else {
+                tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->obtener_movimientos_posibles(Movimientos_pieza_seleccionada, posicion_pieza_actual, this);
+                if(Movimientos_pieza_seleccionada.size()==0) std::cout << "La pieza no tiene movimientos validos" << std::endl;
+                else {
+                    std::cout << "Pieza seleccionada con exito" << std::endl;
+                    piezaSeleccionada = true;
+                }
+            }
+        }else std::cout << "La posicion no existe" << std::endl;
+    }else if(comando=='m' || comando == 'M'){
+        if(!piezaSeleccionada) {
+            std::cout << "No hay ninguna pieza seleccionada" << std::endl;
+            return false;
+        }
+        pedirPos(nueva_posicion_pieza);
+        if(Movimientos_pieza_seleccionada.find(nueva_posicion_pieza)==Movimientos_pieza_seleccionada.end()) std::cout << "La pieza no sepuede mover ahi" << std::endl;
+        else return true;
+    }else if(comando=='d'||comando=='D'){
+        piezaSeleccionada = false;
+    }else if(comando=='e'|| comando == 'E'){
+        piezaSeleccionada = false;
+        return true;
+    }
+    return false;
 
-    fila = 8-fila;
+    
+}
+
+void Tablero::pedirPos(Pos &p){
+    char columna_letra;
+    while (!(std::cin >> columna_letra >> p.x) ) {
+        std::cout << "Entrada invalida. Introduce una letra y un numero para indicar posicion pieza" << std::endl;        
+        std::cin.clear(); 
+        std::cin.ignore(1000, '\n');
+    }
+    if(columna_letra>'H') p.y = columna_letra- 'a';
+    else p.y = columna_letra-'A';
+
+    p.x = 8-p.x;
 }
 
 void Tablero::calculo_jaque(bool &Jaque,const bool equipo, const Pos rei){
