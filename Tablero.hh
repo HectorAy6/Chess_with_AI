@@ -32,15 +32,43 @@ class Tablero {
         }
 
         
+        bool hay_jaque(bool equipo){
+            if(equipo==BLANCA) return jaqueBlanco;
+            else return jaqueNegro;
+        }
+
+        bool hay_jaque_eliminar_pieza(Pos p);
+
+        bool hay_jaque_mover_pieza(Pos original, Pos nueva);
+
+        
     protected:
+
+        #define SIGUIENTE_RONDA 0
+        #define TABLAS 1
+        #define JAQUE_MATE 2  
+
         mat tablero_piezas = mat(size_tablero);
+        std::set<Pos> Movimientos_pieza_seleccionada;
+        Pos Rei_blanco, Rei_negro, posicion_pieza_actual;
+        bool jaqueBlanco, jaqueNegro;
 
         void print();
 
+        void calculo_Jaque(bool equipo){
+            if(equipo==BLANCA) return calculo_jaque(jaqueBlanco, BLANCA, Rei_blanco);
+            else return calculo_jaque(jaqueNegro, NEGRA, Rei_negro);
+
+        }
+
+        void calculo_jaque(bool &Jaque,const bool equipo ,const Pos rei);
+
         //Funcion que juega una ronda del quipo seleccionado, en caso de matar el Rei devuelve True
-        bool movimiento(bool equipo);
+        int movimiento(bool equipo);
 
         void demanarPos(int &fila, int &columna);
+
+        bool tiene_movimientos(bool equipo);
 
 
 };

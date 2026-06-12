@@ -53,7 +53,7 @@ Rei.o: Rei.cc Rei.hh Pieza.hh Tablero.hh
 Dama.o: Dama.cc Dama.hh Pieza.hh Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Tablero.o: Tablero.cc Tablero.hh Peon.hh Torre.hh Caballo.hh Alfil.hh Dama.hh Rei.hh Pieza.hh
+Tablero.o: Tablero.cc Tablero.hh Peon.hh Torre.hh Caballo.hh Alfil.hh Dama.hh Rei.hh Pieza.hh Structs_y_Funciones.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
 main.o: main.cc Tablero.hh

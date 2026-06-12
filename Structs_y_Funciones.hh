@@ -19,8 +19,6 @@ struct Pos {
     Pos(const int p1,const  int p2){
         x=p1;
         y=p2;
-        if(x>=size_tablero) x = size_tablero-1;
-        if(y>=size_tablero) y = size_tablero-1;
     }
     
     Pos(const Pos &p2){
@@ -44,8 +42,16 @@ struct Pos {
         return y==p.y and x==p.x;
     }
 
+    bool operator!=(const Pos &p)const {
+        return y!=p.y or x!=p.x;
+    }
+
     Pos operator+(const Pos &p)const {
         return Pos(x+p.x, y+p.y);
+    }
+    
+    Pos operator-(const Pos &p)const {
+        return Pos(x-p.x, y-p.y);
     }
 
     Pos operator=(const Pos &p){

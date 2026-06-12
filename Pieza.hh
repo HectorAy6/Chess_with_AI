@@ -20,7 +20,9 @@ class Pieza {
         virtual int tipo_de_pieza()=0;
         virtual char print_pieza();
         virtual char print()=0;
-        virtual void obtener_movimientos_posibles(std::set<Pos> &result, Pos p, Tablero *t)=0;
+        virtual void obtener_movimientos_posibles(std::set<Pos> &result, Pos p, Tablero *t);
+        virtual void obtener_casillas_amenaza(std::set<Pos> &result, Pos p, Tablero *t) = 0;
+        virtual void obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t) = 0;
 
     protected:
         bool color;

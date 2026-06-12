@@ -9,8 +9,6 @@ std::ostream& operator<<(std::ostream& os, const Pos& p) {
 
 std::istream& operator>>(std::istream& os, Pos& p) {
     os >> p.x >> p.y;
-    if(p.x>=size_tablero) p.x = size_tablero-1;
-    if(p.y>=size_tablero) p.y = size_tablero-1;
     return os;
 }
 

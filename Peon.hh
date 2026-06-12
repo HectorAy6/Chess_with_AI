@@ -12,7 +12,8 @@ class Peon: public Pieza{
 
         virtual int tipo_de_pieza(){return PEON;}
         virtual char print(){return 'p';}
-        virtual void obtener_movimientos_posibles(std::set<Pos> &result, Pos p, Tablero *t);
+        virtual void obtener_casillas_amenaza(std::set<Pos> &result, Pos p, Tablero *t);
+        virtual void obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t);
         
     private:
         bool primer_movimiento = true;
