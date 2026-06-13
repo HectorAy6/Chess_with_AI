@@ -38,9 +38,18 @@ void Tablero::print(){
 
 int Tablero::movimiento(bool equipo){
 
+    for(int i=0; i<size_tablero; i++){
+        for(int j=0; j<size_tablero; j++){
+            if(ocupado_equipo(Pos(i,j), equipo)) tablero_piezas[i][j]->desactivar_doble_movimiento();
+        }
+    }
+
     while (!pedirComanda(equipo));
 
     if(!piezaSeleccionada) return RENDIRSE;
+
+    if(tablero_piezas[nueva_posicion_pieza.x][nueva_posicion_pieza.y]!=nullptr) movimientos_sin_accion=0;
+    else movimientos_sin_accion ++;
 
     if(posicion_pieza_actual==Rei_blanco) Rei_blanco = nueva_posicion_pieza;
     else if (posicion_pieza_actual==Rei_negro) Rei_negro = nueva_posicion_pieza;
@@ -60,20 +69,25 @@ int Tablero::movimiento(bool equipo){
 
     if(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->tipo_de_pieza()==PEON){
         Pos mov = nueva_posicion_pieza-posicion_pieza_actual;
+        movimientos_sin_accion = 0;
         if(abs(mov.y)!=0 and tablero_piezas[nueva_posicion_pieza.x][nueva_posicion_pieza.y]==nullptr){
-            //Peon al paso
+            if(equipo==BLANCA)tablero_piezas[nueva_posicion_pieza.x+1][nueva_posicion_pieza.y]=nullptr;
+            else tablero_piezas[nueva_posicion_pieza.x-1][nueva_posicion_pieza.y]=nullptr;
         }
         else if(nueva_posicion_pieza.x==0 and equipo == BLANCA){
             coronacion();
         }else if(nueva_posicion_pieza.x==size_tablero-1 and equipo == NEGRA){
             coronacion();
-        }
+        }else if(abs(mov.x)==2) tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->activar_doble_movimiento();
     }
 
     tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->pieza_movida();
 
+    
     tablero_piezas[nueva_posicion_pieza.x][nueva_posicion_pieza.y] = tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y];
     tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = nullptr;
+    
+    if(movimientos_sin_accion==100) return TABLAS;
 
     calculo_Jaque(!equipo);
     if(tiene_movimientos(!equipo)) return SIGUIENTE_RONDA;
@@ -120,7 +134,7 @@ void Tablero::reset(){
     tablero_piezas[7][2] = std::make_shared<Alfil>(BLANCA);
     tablero_piezas[7][5] = std::make_shared<Alfil>(BLANCA);
     for(int i = 0; i<size_tablero; i++){
-        tablero_piezas[1][i] = std::make_shared<Peon>(BLANCA, this);
+        tablero_piezas[6][i] = std::make_shared<Peon>(BLANCA, this);
     }
 
     //Piezas Negras
@@ -133,14 +147,18 @@ void Tablero::reset(){
     tablero_piezas[0][2] = std::make_shared<Alfil>(NEGRA);
     tablero_piezas[0][5] = std::make_shared<Alfil>(NEGRA);
     for(int i = 0; i<size_tablero; i++){
-        tablero_piezas[6][i] = std::make_shared<Peon>(NEGRA, this);
+        tablero_piezas[1][i] = std::make_shared<Peon>(NEGRA, this);
     }
 
+    tablero_piezas[3][4] = std::make_shared<Peon>(BLANCA, this);
+        
     Rei_blanco = Pos(7,4);
     Rei_negro = Pos(0,4);
 
     jaqueBlanco = false;
     jaqueNegro = false;
+
+    movimientos_sin_accion = 0;
 }
 
 bool Tablero::pedirComanda(bool equipo){
@@ -325,4 +343,12 @@ void Tablero::coronacion(){
     else if(c=='c' or c=='C') tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = std::make_shared<Caballo>(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->equipo());
     else if(c=='a' or c=='A') tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = std::make_shared<Alfil>(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->equipo());
 
+}
+
+bool Tablero::posiblePeonPasado(Pos p, bool equipo){
+    if(tablero_piezas[p.x][p.y]==nullptr) return false;
+    if(tablero_piezas[p.x][p.y]->equipo()==equipo) return false;
+    if(tablero_piezas[p.x][p.y]->tipo_de_pieza()!=PEON) return false;
+    if(!tablero_piezas[p.x][p.y]->tiene_doble_movimiento()) return false;
+    return true;
 }

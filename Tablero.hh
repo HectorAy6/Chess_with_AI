@@ -45,6 +45,8 @@ class Tablero {
 
         bool enroque_derecha(Pos rei);
 
+        bool posiblePeonPasado(Pos p, bool equipo);
+
         
     protected:
 
@@ -59,6 +61,8 @@ class Tablero {
         std::set<char> piezas_validas = {'t', 'c', 'a', 'd', 'T', 'C', 'A', 'D'};
         Pos Rei_blanco, Rei_negro, posicion_pieza_actual, nueva_posicion_pieza;
         bool jaqueBlanco, jaqueNegro, piezaSeleccionada;
+
+        int movimientos_sin_accion;
 
         void print();
 

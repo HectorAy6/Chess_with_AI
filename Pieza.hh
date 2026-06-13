@@ -25,7 +25,10 @@ class Pieza {
         virtual void obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t) = 0;
 
         virtual void pieza_movida(){};
+        virtual void activar_doble_movimiento(){}
+        virtual void desactivar_doble_movimiento(){}
         virtual bool se_ha_movido(){ return true;}
+        virtual bool tiene_doble_movimiento(){ return false;}
 
     protected:
         bool color;
