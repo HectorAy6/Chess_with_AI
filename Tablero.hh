@@ -9,6 +9,7 @@
 #include "Rei.hh"
 #include <vector>
 #include <memory>
+#include <map>
 
 
 typedef std::vector<std::vector<std::shared_ptr<Pieza>>> mat;
@@ -60,6 +61,7 @@ class Tablero {
         std::set<char> comandos_validos = {'s', 'e', 'm', 'd', 'S', 'E', 'M', 'D'};
         std::set<char> piezas_validas = {'t', 'c', 'a', 'd', 'T', 'C', 'A', 'D'};
         Pos Rei_blanco, Rei_negro, posicion_pieza_actual, nueva_posicion_pieza;
+        std::map<mat,int> contador_posiciones;
         bool jaqueBlanco, jaqueNegro, piezaSeleccionada;
 
         int movimientos_sin_accion;

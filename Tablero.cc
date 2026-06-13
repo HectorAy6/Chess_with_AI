@@ -87,6 +87,8 @@ int Tablero::movimiento(bool equipo){
     tablero_piezas[nueva_posicion_pieza.x][nueva_posicion_pieza.y] = tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y];
     tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = nullptr;
     
+    contador_posiciones[tablero_piezas]++;
+    if(contador_posiciones[tablero_piezas]>=3) return TABLAS;
     if(movimientos_sin_accion==100) return TABLAS;
 
     calculo_Jaque(!equipo);
@@ -149,8 +151,6 @@ void Tablero::reset(){
     for(int i = 0; i<size_tablero; i++){
         tablero_piezas[1][i] = std::make_shared<Peon>(NEGRA, this);
     }
-
-    tablero_piezas[3][4] = std::make_shared<Peon>(BLANCA, this);
         
     Rei_blanco = Pos(7,4);
     Rei_negro = Pos(0,4);
@@ -159,6 +159,7 @@ void Tablero::reset(){
     jaqueNegro = false;
 
     movimientos_sin_accion = 0;
+    contador_posiciones.clear();
 }
 
 bool Tablero::pedirComanda(bool equipo){
