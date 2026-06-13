@@ -87,6 +87,8 @@ class Tablero {
 
         void coronacion();
 
+        bool demasiadas_pocas_piezas();
+
 
 };
 

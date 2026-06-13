@@ -90,7 +90,7 @@ int Tablero::movimiento(bool equipo){
     contador_posiciones[tablero_piezas]++;
     if(contador_posiciones[tablero_piezas]>=3) return TABLAS;
     if(movimientos_sin_accion==100) return TABLAS;
-
+    if(demasiadas_pocas_piezas()) return TABLAS;
     calculo_Jaque(!equipo);
     if(tiene_movimientos(!equipo)) return SIGUIENTE_RONDA;
     if(hay_jaque(!equipo)) return JAQUE_MATE;
@@ -352,4 +352,29 @@ bool Tablero::posiblePeonPasado(Pos p, bool equipo){
     if(tablero_piezas[p.x][p.y]->tipo_de_pieza()!=PEON) return false;
     if(!tablero_piezas[p.x][p.y]->tiene_doble_movimiento()) return false;
     return true;
+}
+
+bool Tablero::demasiadas_pocas_piezas(){
+    std::pair<int, Pos>piezas_blancas(REI, Pos()), piezas_negras(REI,Pos());
+    for(int i=0; i<size_tablero; i++){
+        for(int j=0; j<size_tablero; j++){
+            if(tablero_piezas[i][j]!=nullptr and tablero_piezas[i][j]->tipo_de_pieza()!=REI){
+                int pieza = tablero_piezas[i][j]->tipo_de_pieza();
+                if(pieza==DAMA or pieza==TORRE or pieza==PEON) return false;
+
+                if(tablero_piezas[i][j]->equipo()==BLANCA) {
+                    if(piezas_blancas.first!=REI) return false;
+                    piezas_blancas = std::pair<int,Pos>(pieza, Pos(i,j));
+                }
+                else if(tablero_piezas[i][j]->equipo()==NEGRA){ 
+                    if(piezas_negras.first!=REI) return false;
+                    piezas_negras = std::pair<int,Pos>(pieza, Pos(i,j));
+                }
+            }
+        }   
+    }
+    if(piezas_blancas.first==REI || piezas_negras.first==REI) return true;
+    if(piezas_blancas.first==CABALLO || piezas_negras.first==CABALLO) return false;
+    if((piezas_blancas.second.x+ piezas_blancas.second.y)%2==(piezas_negras.second.x+ piezas_negras.second.y)%2) return true;
+    return false;
 }
