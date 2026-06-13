@@ -19,6 +19,13 @@ char Pieza::print_pieza(){
     return print();
 }
 
+char Pieza::print_pieza_seleccionada(){
+    if(color==BLANCA) std::cout<<"\033[7m";
+    else std::cout<<"\033[34m";
+    char c = print();
+    return char(c-32);
+}
+
 void Pieza::obtener_movimientos_posibles(std::set<Pos> &result, Pos p, Tablero *t){
     if(t->hay_jaque(color)){
         obtener_casillas_jaque(result,p,t);
@@ -29,7 +36,7 @@ void Pieza::obtener_movimientos_posibles(std::set<Pos> &result, Pos p, Tablero *
             return;
         }
         if(tipo_de_pieza()!=REI)obtener_casillas_amenaza(result,p,t);
-        else obtener_casillas_amenaza(result,p,t);
+        else obtener_casillas_jaque(result,p,t);
     }
     
     return;

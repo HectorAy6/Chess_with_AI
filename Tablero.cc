@@ -13,12 +13,22 @@ Tablero::Tablero(){
 void Tablero::print(){
     std::cout << "  A B C D E F G H" << std::endl;
     for(int i=0; i<size_tablero; i++){
-        std::cout << 8-i;
+        std::cout << size_tablero-i;
         for(int j=0; j<size_tablero; j++){
-            if(tablero_piezas[i][j]==nullptr){
-                std::cout << " .";
+            if(!piezaSeleccionada){
+                if(tablero_piezas[i][j]==nullptr){
+                    std::cout << " .";
+                }else{
+                    std::cout << " " << tablero_piezas[i][j]->print_pieza() << "\033[0m";
+                }
             }else{
-                std::cout << " " << tablero_piezas[i][j]->print_pieza() << "\033[0m";
+                if(tablero_piezas[i][j]==nullptr){
+                    if(Movimientos_pieza_seleccionada.find(Pos(i,j))==Movimientos_pieza_seleccionada.end()) std::cout << " .";
+                    else std::cout << " *";
+                }else{
+                    if(Movimientos_pieza_seleccionada.find(Pos(i,j))==Movimientos_pieza_seleccionada.end()) std::cout << " " << tablero_piezas[i][j]->print_pieza() << "\033[0m";
+                    else std::cout << " " << tablero_piezas[i][j]->print_pieza_seleccionada() << "\033[0m";
+                } 
             }
         }
         std::cout << std::endl;
@@ -29,17 +39,41 @@ void Tablero::print(){
 int Tablero::movimiento(bool equipo){
 
     while (!pedirComanda(equipo));
-    
+
     if(!piezaSeleccionada) return RENDIRSE;
 
     if(posicion_pieza_actual==Rei_blanco) Rei_blanco = nueva_posicion_pieza;
     else if (posicion_pieza_actual==Rei_negro) Rei_negro = nueva_posicion_pieza;
 
+    if(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->tipo_de_pieza()==REI){
+        Pos mov = nueva_posicion_pieza-posicion_pieza_actual;
+        if(abs(mov.y)==2){
+            if(mov.y<0){
+                tablero_piezas[nueva_posicion_pieza.x][nueva_posicion_pieza.y+1] = tablero_piezas[posicion_pieza_actual.x][0];
+                tablero_piezas[posicion_pieza_actual.x][0] = nullptr;
+            }else{
+                tablero_piezas[nueva_posicion_pieza.x][nueva_posicion_pieza.y-1] = tablero_piezas[posicion_pieza_actual.x][size_tablero-1];
+                tablero_piezas[posicion_pieza_actual.x][size_tablero-1] = nullptr;
+            }
+        }
+    }
+
+    if(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->tipo_de_pieza()==PEON){
+        Pos mov = nueva_posicion_pieza-posicion_pieza_actual;
+        if(abs(mov.y)!=0 and tablero_piezas[nueva_posicion_pieza.x][nueva_posicion_pieza.y]==nullptr){
+            //Peon al paso
+        }
+        else if(nueva_posicion_pieza.x==0 and equipo == BLANCA){
+            coronacion();
+        }else if(nueva_posicion_pieza.x==size_tablero-1 and equipo == NEGRA){
+            coronacion();
+        }
+    }
+
     tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->pieza_movida();
 
     tablero_piezas[nueva_posicion_pieza.x][nueva_posicion_pieza.y] = tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y];
     tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = nullptr;
-
 
     calculo_Jaque(!equipo);
     if(tiene_movimientos(!equipo)) return SIGUIENTE_RONDA;
@@ -57,6 +91,7 @@ void Tablero::jugar_partida(){
     while(acabado==SIGUIENTE_RONDA){
         equipo= !equipo;
         acabado = movimiento(equipo);
+        piezaSeleccionada = false;
         print();
     }
     if(acabado==TABLAS) std::cout << "TABLAS";
@@ -85,7 +120,7 @@ void Tablero::reset(){
     tablero_piezas[7][2] = std::make_shared<Alfil>(BLANCA);
     tablero_piezas[7][5] = std::make_shared<Alfil>(BLANCA);
     for(int i = 0; i<size_tablero; i++){
-        tablero_piezas[6][i] = std::make_shared<Peon>(BLANCA, this);
+        tablero_piezas[1][i] = std::make_shared<Peon>(BLANCA, this);
     }
 
     //Piezas Negras
@@ -98,7 +133,7 @@ void Tablero::reset(){
     tablero_piezas[0][2] = std::make_shared<Alfil>(NEGRA);
     tablero_piezas[0][5] = std::make_shared<Alfil>(NEGRA);
     for(int i = 0; i<size_tablero; i++){
-        tablero_piezas[1][i] = std::make_shared<Peon>(NEGRA, this);
+        tablero_piezas[6][i] = std::make_shared<Peon>(NEGRA, this);
     }
 
     Rei_blanco = Pos(7,4);
@@ -136,6 +171,7 @@ bool Tablero::pedirComanda(bool equipo){
                 else {
                     std::cout << "Pieza seleccionada con exito" << std::endl;
                     piezaSeleccionada = true;
+                    print();
                 }
             }
         }else std::cout << "La posicion no existe" << std::endl;
@@ -172,17 +208,18 @@ void Tablero::pedirPos(Pos &p){
 }
 
 void Tablero::calculo_jaque(bool &Jaque,const bool equipo, const Pos rei){
-    std::set<Pos> casillas_amenazadas, aux;
+    std::set<Pos> aux;
     for(int i=0; i<size_tablero; i++){
         for(int j=0; j<size_tablero; j++){
             if(tablero_piezas[i][j]!=nullptr and tablero_piezas[i][j]->equipo()!=equipo){
                 tablero_piezas[i][j]->obtener_casillas_amenaza(aux,Pos(i,j), this);
-                casillas_amenazadas.merge(aux);
+                Jaque = aux.find(rei)!=aux.end();
+                if(Jaque) return;
             }
         }
     }
 
-    Jaque = casillas_amenazadas.find(rei)!=casillas_amenazadas.end();
+    Jaque = false;
 }
 
 bool Tablero::hay_jaque_eliminar_pieza(Pos p){
@@ -232,4 +269,60 @@ bool Tablero::tiene_movimientos(bool equipo){
         }
     }
     return false;
+}
+
+bool Tablero::enroque_derecha(Pos rei){
+    Pos aux = rei+ Pos(0, 1), fin = Pos(rei.x, size_tablero-1);
+    while(aux!=fin){
+        if(tablero_piezas[aux.x][aux.y]!=nullptr) return false;
+        aux = aux + Pos(0, 1);
+    }
+    if(tablero_piezas[aux.x][aux.y]==nullptr) return false;
+    if(tablero_piezas[aux.x][aux.y]->equipo() != tablero_piezas[rei.x][rei.y]->equipo()) return false;
+    if(tablero_piezas[aux.x][aux.y]->tipo_de_pieza()!=TORRE) return false;
+    if(tablero_piezas[aux.x][aux.y]->se_ha_movido()) return false;
+    if(hay_jaque_eliminar_pieza(rei)) return false;
+    if(hay_jaque_mover_pieza(rei, Pos(rei.x, rei.y+1))) return false;
+    if(hay_jaque_mover_pieza(rei, Pos(rei.x, rei.y+2))) return false;
+
+    return true;
+
+}
+
+bool Tablero::enroque_izquierda(Pos rei){
+    Pos aux = rei + Pos(0, -1);
+    while(aux!=Pos(rei.x, 0)){
+        if(tablero_piezas[aux.x][aux.y]!=nullptr) return false;
+        aux = aux + Pos(0, -1);
+    }
+    if(tablero_piezas[aux.x][aux.y]==nullptr) return false;
+    if(tablero_piezas[aux.x][aux.y]->equipo() != tablero_piezas[rei.x][rei.y]->equipo()) return false;
+    if(tablero_piezas[aux.x][aux.y]->tipo_de_pieza()!=TORRE) return false;
+    if(tablero_piezas[aux.x][aux.y]->se_ha_movido()) return false;
+    if(hay_jaque_eliminar_pieza(rei)) return false;
+    if(hay_jaque_mover_pieza(rei, Pos(rei.x, rei.y-1))) return false;
+    if(hay_jaque_mover_pieza(rei, Pos(rei.x, rei.y-2))) return false;
+
+    return true;
+
+}
+
+void Tablero::coronacion(){
+    std::cout << "Introduce a la nueva pieza que quieras coronar:" << std::endl;
+    char c;
+    while(!(std::cin>>c) or piezas_validas.find(c)==piezas_validas.end()){
+        std::cout << "Pieza mal seleccionada, para elegir ponga:" << std::endl;
+        std::cout << "D/d: Dama" << std::endl;
+        std::cout << "C/c Caballo:" << std::endl;
+        std::cout << "A/a Alfil:" << std::endl;
+        std::cout << "T/t Torre:" << std::endl;
+
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
+    }
+    if(c=='d' or c=='D') tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = std::make_shared<Dama>(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->equipo());
+    else if(c=='t' or c=='T') tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = std::make_shared<Torre>(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->equipo());
+    else if(c=='c' or c=='C') tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = std::make_shared<Caballo>(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->equipo());
+    else if(c=='a' or c=='A') tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = std::make_shared<Alfil>(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->equipo());
+
 }

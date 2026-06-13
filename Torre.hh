@@ -13,9 +13,12 @@ class Torre: public Pieza{
         virtual char print(){return 't';}
         virtual void obtener_casillas_amenaza(std::set<Pos> &result, Pos p, Tablero *t);
         virtual void obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t);
+        virtual bool se_ha_movido(){ return !primer_movimiento;}
+        virtual void pieza_movida() override{ primer_movimiento = false;}
 
     private:
         std::vector<Pos> vector_mov={Pos(1,0), Pos(0,1), Pos(-1,0), Pos(0,-1)};
+        bool primer_movimiento = true;
 };
 
 #endif // MACRO

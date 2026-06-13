@@ -41,6 +41,10 @@ class Tablero {
 
         bool hay_jaque_mover_pieza(Pos original, Pos nueva);
 
+        bool enroque_izquierda(Pos rei);
+
+        bool enroque_derecha(Pos rei);
+
         
     protected:
 
@@ -52,6 +56,7 @@ class Tablero {
         mat tablero_piezas = mat(size_tablero);
         std::set<Pos> Movimientos_pieza_seleccionada;
         std::set<char> comandos_validos = {'s', 'e', 'm', 'd', 'S', 'E', 'M', 'D'};
+        std::set<char> piezas_validas = {'t', 'c', 'a', 'd', 'T', 'C', 'A', 'D'};
         Pos Rei_blanco, Rei_negro, posicion_pieza_actual, nueva_posicion_pieza;
         bool jaqueBlanco, jaqueNegro, piezaSeleccionada;
 
@@ -73,6 +78,8 @@ class Tablero {
         void pedirPos(Pos &p);
 
         bool tiene_movimientos(bool equipo);
+
+        void coronacion();
 
 
 };

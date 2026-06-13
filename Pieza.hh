@@ -17,13 +17,15 @@ class Pieza {
         bool equipo(){return color;}
 
         virtual int tipo_de_pieza()=0;
-        virtual char print_pieza();
+        char print_pieza();
+        char print_pieza_seleccionada();
         virtual char print()=0;
         virtual void obtener_movimientos_posibles(std::set<Pos> &result, Pos p, Tablero *t);
         virtual void obtener_casillas_amenaza(std::set<Pos> &result, Pos p, Tablero *t) = 0;
         virtual void obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t) = 0;
 
         virtual void pieza_movida(){};
+        virtual bool se_ha_movido(){ return true;}
 
     protected:
         bool color;
