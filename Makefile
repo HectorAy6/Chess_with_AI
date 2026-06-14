@@ -29,34 +29,34 @@ rebuild: clean all
 
 # ── Reglas de compilación ──────────────────────────────────────────────────────
 
-Structs_y_Funciones.o: Structs_y_Funciones.cc Structs_y_Funciones.hh
+Structs_y_Funciones.o: Code/Structs_y_Funciones.cc Header/Structs_y_Funciones.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Pieza.o: Pieza.cc Pieza.hh Structs_y_Funciones.hh Tablero.hh
+Pieza.o: Code/Pieza.cc Header/Pieza.hh Header/Structs_y_Funciones.hh Header/Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Peon.o: Peon.cc Peon.hh Pieza.hh Tablero.hh
+Peon.o: Code/Peon.cc Header/Peon.hh Header/Pieza.hh Header/Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Torre.o: Torre.cc Torre.hh Pieza.hh Tablero.hh
+Torre.o: Code/Torre.cc Header/Torre.hh Header/Pieza.hh Header/Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Caballo.o: Caballo.cc Caballo.hh Pieza.hh Tablero.hh
+Caballo.o: Code/Caballo.cc Header/Caballo.hh Header/Pieza.hh Header/Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Alfil.o: Alfil.cc Alfil.hh Pieza.hh Tablero.hh
+Alfil.o: Code/Alfil.cc Header/Alfil.hh Header/Pieza.hh Header/Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Rei.o: Rei.cc Rei.hh Pieza.hh Tablero.hh
+Rei.o: Code/Rei.cc Header/Rei.hh Header/Pieza.hh Header/Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Dama.o: Dama.cc Dama.hh Pieza.hh Tablero.hh
+Dama.o: Code/Dama.cc Header/Dama.hh Header/Pieza.hh Header/Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-Tablero.o: Tablero.cc Tablero.hh Peon.hh Torre.hh Caballo.hh Alfil.hh Dama.hh Rei.hh Pieza.hh Structs_y_Funciones.hh
+Tablero.o: Code/Tablero.cc Header/Tablero.hh Header/Peon.hh Header/Torre.hh Header/Caballo.hh Header/Alfil.hh Header/Dama.hh Header/Rei.hh Header/Pieza.hh Header/Structs_y_Funciones.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
-main.o: main.cc Tablero.hh
+main.o: Code/main.cc Header/Tablero.hh
 	$(CXX) $(CXXFLAGS) -c $<
 
 # ── Limpieza ───────────────────────────────────────────────────────────────────
