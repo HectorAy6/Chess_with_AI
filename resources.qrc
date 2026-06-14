@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file>Images/Alfil_B.png</file>
+        <file>Images/Alfil_N.png</file>
+        <file>Images/Caballo_B.png</file>
+        <file>Images/Caballo_N.png</file>
+        <file>Images/Dama_B.png</file>
+        <file>Images/Dama_N.png</file>
+        <file>Images/Peon_B.png</file>
+        <file>Images/Peon_N.png</file>
+        <file>Images/Rei_B.png</file>
+        <file>Images/Rei_N.png</file>
+        <file>Images/Torre_B.png</file>
+        <file>Images/Torre_N.png</file>
+    </qresource>
+</RCC>

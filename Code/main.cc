@@ -1,17 +1,20 @@
 #include <iostream>
+#include <QApplication>
+#include <QWidget>
 #include "../Header/Tablero.hh"
+#include "ui_chess.h"
 
 
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
 
-int main(){
-    char c;
-    Tablero t;
-    t.jugar_partida();
-    std::cin >> c;
-    while(c=='r'){
-        t.reset();
-        t.jugar_partida();
-        std::cin >> c;
-    }
+    // Creamos una ventana base
+    QWidget *ventana = new QWidget();
 
+    // Instanciamos la interfaz generada por el .ui
+    Ui::Window ui; // Nota: "Form" es el nombre del objeto principal en Qt Designer (puede ser MainWindow)
+    ui.setupUi(ventana);
+
+    ventana->show();
+    return app.exec();
 }
