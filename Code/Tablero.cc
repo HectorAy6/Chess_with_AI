@@ -37,7 +37,7 @@ void Tablero::print(){
 }
 
 int Tablero::movimiento(bool equipo){
-
+    coronando = false;
     for(int i=0; i<size_tablero; i++){
         for(int j=0; j<size_tablero; j++){
             if(ocupado_equipo(Pos(i,j), equipo)) tablero_piezas[i][j]->desactivar_doble_movimiento();
@@ -75,12 +75,15 @@ int Tablero::movimiento(bool equipo){
             else tablero_piezas[nueva_posicion_pieza.x-1][nueva_posicion_pieza.y]=nullptr;
         }
         else if(nueva_posicion_pieza.x==0 and equipo == BLANCA){
-            coronacion();
+            //coronacion();
+            coronando = true;
+            return CORONACION;
         }else if(nueva_posicion_pieza.x==size_tablero-1 and equipo == NEGRA){
-            coronacion();
+            //coronacion();
+            coronando = true;
+            return CORONACION;
         }else if(abs(mov.x)==2) tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->activar_doble_movimiento();
     }
-
     tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->pieza_movida();
 
     
@@ -161,6 +164,8 @@ void Tablero::reset(){
     jaqueBlanco = false;
     jaqueNegro = false;
     equipo_jugando = BLANCA;
+    coronando = false;
+    piezaSeleccionada = false;
 
     movimientos_sin_accion = 0;
     contador_posiciones.clear();
@@ -391,6 +396,18 @@ int Tablero::enviar_pos(char f, int c){
     p.x = 8-c;
     
     if(!pos_aceptable(p.x, p.y)) return POS_NO_VALIDA;
+    if(coronando){
+        if(p.y!=nueva_posicion_pieza.y or abs(p.x-nueva_posicion_pieza.x)>3) return POS_NO_VALIDA;
+        if(abs(p.x-nueva_posicion_pieza.x)==0) tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = std::make_shared<Dama>(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->equipo());
+        else if(abs(p.x-nueva_posicion_pieza.x)==1) tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = std::make_shared<Torre>(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->equipo());
+        else if(abs(p.x-nueva_posicion_pieza.x)==2) tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = std::make_shared<Caballo>(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->equipo());
+        else if(abs(p.x-nueva_posicion_pieza.x)==3) tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y] = std::make_shared<Alfil>(tablero_piezas[posicion_pieza_actual.x][posicion_pieza_actual.y]->equipo());
+        piezaSeleccionada = true;
+        int res = movimiento(equipo_jugando);
+        piezaSeleccionada = false;
+        Movimientos_pieza_seleccionada.clear();
+        return res;
+    }
     if(tablero_piezas[p.x][p.y]!=nullptr and tablero_piezas[p.x][p.y]->equipo()==equipo_jugando){
         tablero_piezas[p.x][p.y]->obtener_movimientos_posibles(Movimientos_pieza_seleccionada, p, this);
         piezaSeleccionada = true;
@@ -409,6 +426,6 @@ int Tablero::enviar_pos(char f, int c){
 }
 
 QPixmap& Tablero::get_image(int i, int j){
-    if(tablero_piezas[i][j]==nullptr) return imagen_vacia;
+    if(!pos_aceptable(i,j)||tablero_piezas[i][j]==nullptr) return imagen_vacia;
     return tablero_piezas[i][j]->image();
 }

@@ -5203,7 +5203,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>Images/Alfil_N.png</pixmap>
+        <pixmap>../../.designer/backup/Images/Alfil_N.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -6092,9 +6092,6 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="2">
-    <widget class="MyQWidget" name="widget" native="true"/>
-   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -6106,17 +6103,6 @@
     <signal>click(char,int)</signal>
     <slot>color_fondo(char,int,QColor)</slot>
     <slot>imagen_pieza(char,int,QPixmap)</slot>
-   </slots>
-  </customwidget>
-  <customwidget>
-   <class>MyQWidget</class>
-   <extends>QWidget</extends>
-   <header>Header/MyQWidget.hh</header>
-   <container>1</container>
-   <slots>
-    <signal>enviar_color(char,int,QColor)</signal>
-    <signal>enviar_imatge(char,int,QPixmap)</signal>
-    <slot>recivirPos(char,int)</slot>
    </slots>
   </customwidget>
  </customwidgets>

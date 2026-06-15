@@ -55,6 +55,7 @@ class Tablero {
         void get_movimientos_pos(std::set<Pos> &s){s = Movimientos_pieza_seleccionada;}
         Pos get_pieza_sel(){return posicion_pieza_actual;}
         bool get_hay_pieza_sel() {return piezaSeleccionada;}
+        bool get_equipo(){return equipo_jugando;}
 
         QPixmap& get_image(int i, int j);
 
@@ -69,6 +70,7 @@ class Tablero {
         #define JAQUE_MATE_B 5
         #define JAQUE_MATE_N 6
         #define PIEZA_SELECCIONADA 7
+        #define CORONACION 8
 
 
         mat tablero_piezas = mat(size_tablero);
@@ -77,7 +79,7 @@ class Tablero {
         std::set<char> piezas_validas = {'t', 'c', 'a', 'd', 'T', 'C', 'A', 'D'};
         Pos Rei_blanco, Rei_negro, posicion_pieza_actual, nueva_posicion_pieza;
         std::map<mat,int> contador_posiciones;
-        bool jaqueBlanco, jaqueNegro, piezaSeleccionada, equipo_jugando;
+        bool jaqueBlanco, jaqueNegro, piezaSeleccionada, equipo_jugando, coronando;
         QPixmap imagen_vacia;
 
         int movimientos_sin_accion;
