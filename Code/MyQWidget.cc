@@ -8,13 +8,24 @@ void MyQWidget::recivir_Pos(char f, int c){
     if(partida_acabada) return;
     int res = t.enviar_pos(f, c);
     if(res == POS_NO_VALIDA) return;
-    if(res == TABLAS or res == JAQUE_MATE_B or res == JAQUE_MATE_N){
+    if(res == TABLAS or res == JAQUE_MATE_B or res == JAQUE_MATE_N or res == RENDIRSE){
         partida_acabada = true;
         pintar_tablero();
+        // justo donde detectas el resultado (donde ahora generas "JAQUE MATE GANADOR BLANCO"/"NEGRO")
+        if(res == JAQUE_MATE_B){
+            QMessageBox::information(this, "Fin de la partida", "Jaque mate. Ganan las blancas.");
+        } else if(res == TABLAS){
+            QMessageBox::information(this, "Fin de la partida", "Tablas.");
+        } else if(res == RENDIRSE){
+            QMessageBox::information(this, "Fin de la partida", "Se ha rendido. Ganan las .");
+        }if(res == JAQUE_MATE_N){
+            QMessageBox::information(this, "Fin de la partida", "Jaque mate. Ganan las negras.");
+        }
         return;
     }
     if(res == SIGUIENTE_RONDA){
         t.cambio_equipo();
+        t.actualizar_posiciones();
     }
     if(res==CORONACION){
         Pos p;
@@ -30,9 +41,10 @@ void MyQWidget::recivir_Pos(char f, int c){
 }
 
 void MyQWidget::pintar_tablero(){
-    std::set<Pos> movimientos_pos; 
+    std::set<Pos> movimientos_pos, antigua_pos; 
     t.get_movimientos_pos(movimientos_pos);
     Pos pieza_sel = t.get_pieza_sel();
+    t.get_antiguasPos(antigua_pos);
     bool hay_pieza_sel = t.get_hay_pieza_sel();
 
     for(int i=0; i<size_tablero; i++){
@@ -42,6 +54,9 @@ void MyQWidget::pintar_tablero(){
                 col = QColor(91, 57, 13);
             }else{
                 col = QColor(238, 212, 114);
+            }
+            if(antigua_pos.find(Pos(i,j))!=antigua_pos.end()){
+                col = QColor(0,255,0);
             }
             if(movimientos_pos.find(Pos(i,j))!=movimientos_pos.end()){
                 col = QColor(255,0,0);
@@ -96,4 +111,10 @@ void MyQWidget::pintar_coronacion(Pos p){
             
         }
     }
+}
+
+void MyQWidget::restart(){
+    t.reset();
+    partida_acabada = false;
+    pintar_tablero();
 }

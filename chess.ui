@@ -14,7 +14,7 @@
    <string>chess</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="1">
+   <item row="2" column="1">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -27,7 +27,7 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="0">
+   <item row="3" column="0">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -40,7 +40,14 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="1">
+   <item row="4" column="2">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Exit</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
     <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,0,0,0,0,0,0,0" columnstretch="0,0,0,0,0,0,0,0" rowminimumheight="60,60,60,60,60,60,60,60" columnminimumwidth="60,60,60,60,60,60,60,60">
      <property name="sizeConstraint">
       <enum>QLayout::SetFixedSize</enum>
@@ -6066,7 +6073,20 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="1">
+   <item row="3" column="2">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="4" column="1">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -6079,18 +6099,12 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="2">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>Restart</string>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -6109,5 +6123,41 @@
  <resources>
   <include location="resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Window</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>801</x>
+     <y>783</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>793</x>
+     <y>832</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>Window</receiver>
+   <slot>restart()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>661</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>793</x>
+     <y>80</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>restart()</slot>
+ </slots>
 </ui>

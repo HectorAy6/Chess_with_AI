@@ -50,9 +50,16 @@ class Tablero {
 
         int enviar_pos(char c, int f);
 
+        void actualizar_posiciones(){
+            antigua_pos_a = posicion_pieza_actual;
+            antigua_pos_n = nueva_posicion_pieza;
+        }
+
         void cambio_equipo(){equipo_jugando = !equipo_jugando;}
 
         void get_movimientos_pos(std::set<Pos> &s){s = Movimientos_pieza_seleccionada;}
+        void get_antiguasPos(std::set<Pos> &s){s = std::set<Pos>{antigua_pos_a, antigua_pos_n};}
+        
         Pos get_pieza_sel(){return posicion_pieza_actual;}
         bool get_hay_pieza_sel() {return piezaSeleccionada;}
         bool get_equipo(){return equipo_jugando;}
@@ -77,7 +84,7 @@ class Tablero {
         std::set<Pos> Movimientos_pieza_seleccionada;
         std::set<char> comandos_validos = {'s', 'e', 'm', 'd', 'S', 'E', 'M', 'D'};
         std::set<char> piezas_validas = {'t', 'c', 'a', 'd', 'T', 'C', 'A', 'D'};
-        Pos Rei_blanco, Rei_negro, posicion_pieza_actual, nueva_posicion_pieza;
+        Pos Rei_blanco, Rei_negro, posicion_pieza_actual, nueva_posicion_pieza, antigua_pos_a, antigua_pos_n;
         std::map<mat,int> contador_posiciones;
         bool jaqueBlanco, jaqueNegro, piezaSeleccionada, equipo_jugando, coronando;
         QPixmap imagen_vacia;

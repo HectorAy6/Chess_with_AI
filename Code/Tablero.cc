@@ -160,7 +160,9 @@ void Tablero::reset(){
         
     Rei_blanco = Pos(7,4);
     Rei_negro = Pos(0,4);
-
+    antigua_pos_a = Pos(-1,-1);
+    antigua_pos_n = Pos(-1,-1);
+    
     jaqueBlanco = false;
     jaqueNegro = false;
     equipo_jugando = BLANCA;
