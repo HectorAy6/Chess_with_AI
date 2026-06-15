@@ -15,6 +15,12 @@ int main(int argc, char *argv[]) {
     Ui::Window ui; // Nota: "Form" es el nombre del objeto principal en Qt Designer (puede ser MainWindow)
     ui.setupUi(ventana);
 
+    QList<Casilla*> casi = ventana->findChildren<Casilla*>();
+    QList<MyQWidget*> control = ventana->findChildren<MyQWidget*>();
+    for(auto i: casi){
+        i->setControl(control[0]);
+    }
+    control[0]->pintar_tablero();
     ventana->show();
     return app.exec();
 }

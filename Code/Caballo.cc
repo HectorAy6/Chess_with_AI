@@ -1,7 +1,10 @@
 #include "../Header/Caballo.hh"
 #include "../Header/Tablero.hh"
 
-Caballo::Caballo (bool blanca):Pieza(blanca){}
+Caballo::Caballo (bool blanca):Pieza(blanca){
+    if(blanca==BLANCA)imagen = QPixmap(":/Images/Images/Caballo_B.png");
+    else imagen = QPixmap(":/Images/Images/Caballo_N.png");
+}
 Caballo::Caballo (Pieza *p2):Pieza(p2){}
 Caballo::Caballo ():Pieza(){}
 

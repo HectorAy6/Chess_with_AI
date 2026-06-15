@@ -1,7 +1,10 @@
 #include "../Header/Dama.hh"
 #include "../Header/Tablero.hh"
 
-Dama::Dama (bool blanca):Pieza(blanca){}
+Dama::Dama (bool blanca):Pieza(blanca){
+    if(blanca==BLANCA)imagen = QPixmap(":/Images/Images/Dama_B.png");
+    else imagen = QPixmap(":/Images/Images/Dama_N.png");
+}
 Dama::Dama (Pieza *p2):Pieza(p2){}
 Dama::Dama ():Pieza(){}
 

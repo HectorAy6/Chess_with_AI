@@ -6,7 +6,7 @@
 
 class Peon: public Pieza{
     public:
-        Peon (bool blanca, Tablero *t);
+        Peon (bool blanca);
         Peon (Pieza *p2);
         Peon ();
 
@@ -23,7 +23,6 @@ class Peon: public Pieza{
     private:
         bool primer_movimiento = true, doble_movimiento=false;;
         std::set<Pos> movimientos_validos = {Pos(-1,0), Pos(-2,0), Pos(-1,1), Pos(1,-1)}; 
-        Tablero *tab;
 };
 
 #endif // MACRO

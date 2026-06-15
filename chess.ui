@@ -46,7 +46,7 @@
       <enum>QLayout::SetFixedSize</enum>
      </property>
      <item row="6" column="1">
-      <widget class="Casilla" name="label_111">
+      <widget class="Casilla" name="B2">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -140,7 +140,7 @@
       </widget>
      </item>
      <item row="7" column="7">
-      <widget class="Casilla" name="label_114">
+      <widget class="Casilla" name="H1">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -234,7 +234,7 @@
       </widget>
      </item>
      <item row="7" column="5">
-      <widget class="Casilla" name="label_115">
+      <widget class="Casilla" name="F1">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -328,7 +328,7 @@
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="Casilla" name="label_3">
+      <widget class="Casilla" name="A6">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -422,7 +422,7 @@
       </widget>
      </item>
      <item row="5" column="3">
-      <widget class="Casilla" name="label_102">
+      <widget class="Casilla" name="D3">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -516,7 +516,7 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="Casilla" name="label_92">
+      <widget class="Casilla" name="B5">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -610,7 +610,7 @@
       </widget>
      </item>
      <item row="6" column="0">
-      <widget class="Casilla" name="label_76">
+      <widget class="Casilla" name="A2">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -707,7 +707,7 @@
       </widget>
      </item>
      <item row="3" column="3">
-      <widget class="Casilla" name="label_86">
+      <widget class="Casilla" name="D5">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -801,7 +801,7 @@
       </widget>
      </item>
      <item row="2" column="6">
-      <widget class="Casilla" name="label_87">
+      <widget class="Casilla" name="G6">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -895,7 +895,7 @@
       </widget>
      </item>
      <item row="1" column="4">
-      <widget class="Casilla" name="label_122">
+      <widget class="Casilla" name="E7">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -989,7 +989,7 @@
       </widget>
      </item>
      <item row="6" column="7">
-      <widget class="Casilla" name="label_105">
+      <widget class="Casilla" name="H2">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -1083,7 +1083,7 @@
       </widget>
      </item>
      <item row="6" column="3">
-      <widget class="Casilla" name="label_110">
+      <widget class="Casilla" name="D2">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -1177,7 +1177,7 @@
       </widget>
      </item>
      <item row="3" column="2">
-      <widget class="Casilla" name="label_90">
+      <widget class="Casilla" name="C5">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -1271,7 +1271,7 @@
       </widget>
      </item>
      <item row="2" column="3">
-      <widget class="Casilla" name="label_85">
+      <widget class="Casilla" name="D6">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -1365,7 +1365,7 @@
       </widget>
      </item>
      <item row="2" column="2">
-      <widget class="Casilla" name="label_80">
+      <widget class="Casilla" name="C6">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -1459,7 +1459,7 @@
       </widget>
      </item>
      <item row="1" column="3">
-      <widget class="Casilla" name="label_121">
+      <widget class="Casilla" name="D7">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -1553,7 +1553,7 @@
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="Casilla" name="label_74">
+      <widget class="Casilla" name="A5">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -1647,7 +1647,7 @@
       </widget>
      </item>
      <item row="7" column="2">
-      <widget class="Casilla" name="label_118">
+      <widget class="Casilla" name="C1">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -1741,7 +1741,7 @@
       </widget>
      </item>
      <item row="4" column="7">
-      <widget class="Casilla" name="label_89">
+      <widget class="Casilla" name="H4">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -1835,7 +1835,7 @@
       </widget>
      </item>
      <item row="7" column="1">
-      <widget class="Casilla" name="label_120">
+      <widget class="Casilla" name="B1">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -1929,7 +1929,7 @@
       </widget>
      </item>
      <item row="5" column="5">
-      <widget class="Casilla" name="label_109">
+      <widget class="Casilla" name="F3">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -2023,7 +2023,7 @@
       </widget>
      </item>
      <item row="3" column="6">
-      <widget class="Casilla" name="label_84">
+      <widget class="Casilla" name="G5">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -2117,7 +2117,7 @@
       </widget>
      </item>
      <item row="6" column="6">
-      <widget class="Casilla" name="label_107">
+      <widget class="Casilla" name="G2">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -2211,7 +2211,7 @@
       </widget>
      </item>
      <item row="4" column="5">
-      <widget class="Casilla" name="label_98">
+      <widget class="Casilla" name="F4">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -2305,7 +2305,7 @@
       </widget>
      </item>
      <item row="6" column="4">
-      <widget class="Casilla" name="label_108">
+      <widget class="Casilla" name="E2">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -2399,7 +2399,7 @@
       </widget>
      </item>
      <item row="6" column="2">
-      <widget class="Casilla" name="label_113">
+      <widget class="Casilla" name="C2">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -2493,7 +2493,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="Casilla" name="label_81">
+      <widget class="Casilla" name="B6">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -2587,7 +2587,7 @@
       </widget>
      </item>
      <item row="7" column="3">
-      <widget class="Casilla" name="label_116">
+      <widget class="Casilla" name="D1">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -2681,7 +2681,7 @@
       </widget>
      </item>
      <item row="4" column="2">
-      <widget class="Casilla" name="label_100">
+      <widget class="Casilla" name="C4">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -2775,7 +2775,7 @@
       </widget>
      </item>
      <item row="1" column="7">
-      <widget class="Casilla" name="label_82">
+      <widget class="Casilla" name="H7">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -2869,7 +2869,7 @@
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="Casilla" name="label_77">
+      <widget class="Casilla" name="A8">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -2963,7 +2963,7 @@
       </widget>
      </item>
      <item row="7" column="6">
-      <widget class="Casilla" name="label_119">
+      <widget class="Casilla" name="G1">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -3057,7 +3057,7 @@
       </widget>
      </item>
      <item row="2" column="4">
-      <widget class="Casilla" name="label_79">
+      <widget class="Casilla" name="E6">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -3151,7 +3151,7 @@
       </widget>
      </item>
      <item row="3" column="5">
-      <widget class="Casilla" name="label_88">
+      <widget class="Casilla" name="F5">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -3245,7 +3245,7 @@
       </widget>
      </item>
      <item row="5" column="4">
-      <widget class="Casilla" name="label_104">
+      <widget class="Casilla" name="E3">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -3339,7 +3339,7 @@
       </widget>
      </item>
      <item row="3" column="7">
-      <widget class="Casilla" name="label_94">
+      <widget class="Casilla" name="H5">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -3433,7 +3433,7 @@
       </widget>
      </item>
      <item row="3" column="4">
-      <widget class="Casilla" name="label_91">
+      <widget class="Casilla" name="E5">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -3527,7 +3527,7 @@
       </widget>
      </item>
      <item row="4" column="0">
-      <widget class="Casilla" name="label_73">
+      <widget class="Casilla" name="A4">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -3621,7 +3621,7 @@
       </widget>
      </item>
      <item row="1" column="6">
-      <widget class="Casilla" name="label_124">
+      <widget class="Casilla" name="G7">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -3715,7 +3715,7 @@
       </widget>
      </item>
      <item row="5" column="6">
-      <widget class="Casilla" name="label_103">
+      <widget class="Casilla" name="G3">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -3809,7 +3809,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="Casilla" name="label_78">
+      <widget class="Casilla" name="A7">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -3903,7 +3903,7 @@
       </widget>
      </item>
      <item row="4" column="4">
-      <widget class="Casilla" name="label_93">
+      <widget class="Casilla" name="E4">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -3997,7 +3997,7 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="Casilla" name="label_123">
+      <widget class="Casilla" name="C7">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -4091,7 +4091,7 @@
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="Casilla" name="label_99">
+      <widget class="Casilla" name="B4">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -4185,7 +4185,7 @@
       </widget>
      </item>
      <item row="0" column="5">
-      <widget class="Casilla" name="label_125">
+      <widget class="Casilla" name="F8">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -4279,7 +4279,7 @@
       </widget>
      </item>
      <item row="0" column="6">
-      <widget class="Casilla" name="label_129">
+      <widget class="Casilla" name="G8">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -4373,7 +4373,7 @@
       </widget>
      </item>
      <item row="7" column="0">
-      <widget class="Casilla" name="label_67">
+      <widget class="Casilla" name="A1">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -4467,7 +4467,7 @@
       </widget>
      </item>
      <item row="0" column="3">
-      <widget class="Casilla" name="label_132">
+      <widget class="Casilla" name="D8">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -4561,7 +4561,7 @@
       </widget>
      </item>
      <item row="5" column="7">
-      <widget class="Casilla" name="label_101">
+      <widget class="Casilla" name="H3">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -4655,7 +4655,7 @@
       </widget>
      </item>
      <item row="7" column="4">
-      <widget class="Casilla" name="label_117">
+      <widget class="Casilla" name="E1">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -4749,7 +4749,7 @@
       </widget>
      </item>
      <item row="2" column="5">
-      <widget class="Casilla" name="label_83">
+      <widget class="Casilla" name="F6">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -4843,7 +4843,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="Casilla" name="label_127">
+      <widget class="Casilla" name="B7">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -4937,7 +4937,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="Casilla" name="label_131">
+      <widget class="Casilla" name="B8">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -5031,7 +5031,7 @@
       </widget>
      </item>
      <item row="5" column="0">
-      <widget class="Casilla" name="label_75">
+      <widget class="Casilla" name="A3">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -5125,7 +5125,7 @@
       </widget>
      </item>
      <item row="5" column="2">
-      <widget class="Casilla" name="label_96">
+      <widget class="Casilla" name="C3">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -5219,7 +5219,7 @@
       </widget>
      </item>
      <item row="0" column="2">
-      <widget class="Casilla" name="label_128">
+      <widget class="Casilla" name="C8">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -5313,7 +5313,7 @@
       </widget>
      </item>
      <item row="1" column="5">
-      <widget class="Casilla" name="label_130">
+      <widget class="Casilla" name="F7">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -5407,7 +5407,7 @@
       </widget>
      </item>
      <item row="4" column="3">
-      <widget class="Casilla" name="label_97">
+      <widget class="Casilla" name="D4">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -5501,7 +5501,7 @@
       </widget>
      </item>
      <item row="6" column="5">
-      <widget class="Casilla" name="label_112">
+      <widget class="Casilla" name="F2">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -5595,7 +5595,7 @@
       </widget>
      </item>
      <item row="2" column="7">
-      <widget class="Casilla" name="label_126">
+      <widget class="Casilla" name="H6">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -5689,7 +5689,7 @@
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="Casilla" name="label_106">
+      <widget class="Casilla" name="B3">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -5783,7 +5783,7 @@
       </widget>
      </item>
      <item row="4" column="6">
-      <widget class="Casilla" name="label_95">
+      <widget class="Casilla" name="G4">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -5877,7 +5877,7 @@
       </widget>
      </item>
      <item row="0" column="7">
-      <widget class="Casilla" name="label_133">
+      <widget class="Casilla" name="H8">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -5971,7 +5971,7 @@
       </widget>
      </item>
      <item row="0" column="4">
-      <widget class="Casilla" name="label_134">
+      <widget class="Casilla" name="E8">
        <property name="maximumSize">
         <size>
          <width>60</width>
@@ -6102,12 +6102,22 @@
    <class>Casilla</class>
    <extends>QLabel</extends>
    <header>Header/Casilla.hh</header>
+   <slots>
+    <signal>click(char,int)</signal>
+    <slot>color_fondo(char,int,QColor)</slot>
+    <slot>imagen_pieza(char,int,QPixmap)</slot>
+   </slots>
   </customwidget>
   <customwidget>
    <class>MyQWidget</class>
    <extends>QWidget</extends>
    <header>Header/MyQWidget.hh</header>
    <container>1</container>
+   <slots>
+    <signal>enviar_color(char,int,QColor)</signal>
+    <signal>enviar_imatge(char,int,QPixmap)</signal>
+    <slot>recivirPos(char,int)</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources>

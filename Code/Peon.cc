@@ -1,7 +1,10 @@
 #include "../Header/Peon.hh"
 #include "../Header/Tablero.hh"
 
-Peon::Peon (bool blanca, Tablero *t):Pieza(blanca){ tab = t;}
+Peon::Peon (bool blanca):Pieza(blanca){ 
+    if(blanca==BLANCA)imagen = QPixmap(":/Images/Images/Peon_B.png");
+    else imagen = QPixmap(":/Images/Images/Peon_N.png");
+}
 Peon::Peon (Pieza *p2):Pieza(p2){}
 Peon::Peon ():Pieza(){}
 

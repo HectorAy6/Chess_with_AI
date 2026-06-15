@@ -1,7 +1,10 @@
 #include "../Header/Torre.hh"
 #include "../Header/Tablero.hh"
 
-Torre::Torre (bool blanca):Pieza(blanca){}
+Torre::Torre (bool blanca):Pieza(blanca){
+    if(blanca==BLANCA)imagen = QPixmap(":/Images/Images/Torre_B.png");
+    else imagen = QPixmap(":/Images/Images/Torre_N.png");
+}
 Torre::Torre (Pieza *p2):Pieza(p2){}
 Torre::Torre ():Pieza(){}
 

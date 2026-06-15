@@ -4,6 +4,7 @@
 #include "Structs_y_Funciones.hh"
 #include <set>
 #include <vector>
+#include <QWidget>
 
 class Tablero;
 
@@ -29,9 +30,11 @@ class Pieza {
         virtual void desactivar_doble_movimiento(){}
         virtual bool se_ha_movido(){ return true;}
         virtual bool tiene_doble_movimiento(){ return false;}
+        QPixmap& image(){ return imagen;}
 
     protected:
         bool color;
+        QPixmap imagen;
         
     
 };

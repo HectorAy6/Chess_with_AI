@@ -1,7 +1,10 @@
 #include "../Header/Alfil.hh"
 #include "../Header/Tablero.hh"
 
-Alfil::Alfil (bool blanca):Pieza(blanca){}
+Alfil::Alfil (bool blanca):Pieza(blanca){
+    if(blanca==BLANCA)imagen = QPixmap(":/Images/Images/Alfil_B.png");
+    else imagen = QPixmap(":/Images/Images/Alfil_N.png");
+}
 Alfil::Alfil (Pieza *p2):Pieza(p2){}
 Alfil::Alfil ():Pieza(){}
 
