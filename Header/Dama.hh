@@ -10,7 +10,7 @@ class Dama: public Pieza{
         Dama ();
                 
         virtual int tipo_de_pieza(){return DAMA;}
-        virtual char print(){return 'd';}
+        virtual char print(){return 'q';}
 
         virtual void obtener_casillas_amenaza(std::set<Pos> &result, Pos p, Tablero *t);
         virtual void obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t);

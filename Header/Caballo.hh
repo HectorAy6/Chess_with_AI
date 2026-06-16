@@ -9,7 +9,7 @@ class Caballo: public Pieza{
         Caballo (Pieza *p2);
         Caballo ();
         virtual int tipo_de_pieza(){return CABALLO;}
-        virtual char print(){return 'c';}
+        virtual char print(){return 'n';}
         virtual void obtener_casillas_amenaza(std::set<Pos> &result, Pos p, Tablero *t);
         virtual void obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t);
         

@@ -32,7 +32,7 @@ class Casilla: public QLabel{
         void mouseReleaseEvent (QMouseEvent *e);
 
     signals:
-        void click(char f, int c);
+        void click(char f, int c, bool stock);
 
     public slots:
         void color_fondo(char f, int c ,QColor col);

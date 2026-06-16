@@ -61,8 +61,11 @@ class Tablero {
         void get_antiguasPos(std::set<Pos> &s){s = std::set<Pos>{antigua_pos_a, antigua_pos_n};}
         
         Pos get_pieza_sel(){return posicion_pieza_actual;}
+        Pos get_pieza_nueva(){return nueva_posicion_pieza;}
         bool get_hay_pieza_sel() {return piezaSeleccionada;}
         bool get_equipo(){return equipo_jugando;}
+
+        char print_pieza(int x, int y){return tablero_piezas[x][y]->print();}
 
         QPixmap& get_image(int i, int j);
 

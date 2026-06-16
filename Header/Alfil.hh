@@ -9,7 +9,7 @@ class Alfil: public Pieza{
         Alfil (Pieza *p2);
         Alfil ();
         virtual int tipo_de_pieza(){return ALFIL;}
-        virtual char print(){return 'a';}
+        virtual char print(){return 'b';}
         virtual void obtener_casillas_amenaza(std::set<Pos> &result, Pos p, Tablero *t);
         virtual void obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t);
 

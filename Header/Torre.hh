@@ -10,7 +10,7 @@ class Torre: public Pieza{
         Torre ();
 
         virtual int tipo_de_pieza(){return TORRE;}
-        virtual char print(){return 't';}
+        virtual char print(){return 'r';}
         virtual void obtener_casillas_amenaza(std::set<Pos> &result, Pos p, Tablero *t);
         virtual void obtener_casillas_jaque(std::set<Pos> &result, Pos p, Tablero *t);
         virtual bool se_ha_movido(){ return !primer_movimiento;}

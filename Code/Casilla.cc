@@ -5,7 +5,7 @@ Casilla::Casilla(QWidget *parent):QLabel(parent){
 
 void Casilla::mouseReleaseEvent (QMouseEvent *event)
 {
-    emit click(fi,co);
+    emit click(fi,co, false);
 }
 
 void Casilla::color_fondo(char f, int c, QColor col){

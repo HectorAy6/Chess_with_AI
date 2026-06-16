@@ -1,4 +1,4 @@
-QT       += widgets
+QT       += widgets core
 
 TEMPLATE = app
 TARGET   = ChessAi
@@ -9,3 +9,5 @@ HEADERS += Header/*.hh
 FORMS   += chess.ui
 
 RESOURCES += resources.qrc
+
+LIBS += -lcurl

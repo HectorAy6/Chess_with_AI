@@ -162,13 +162,13 @@ void Tablero::reset(){
     Rei_negro = Pos(0,4);
     antigua_pos_a = Pos(-1,-1);
     antigua_pos_n = Pos(-1,-1);
-    
+
     jaqueBlanco = false;
     jaqueNegro = false;
     equipo_jugando = BLANCA;
     coronando = false;
     piezaSeleccionada = false;
-
+    Movimientos_pieza_seleccionada.clear();
     movimientos_sin_accion = 0;
     contador_posiciones.clear();
 }
