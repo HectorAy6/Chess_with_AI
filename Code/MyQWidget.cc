@@ -139,6 +139,7 @@ void MyQWidget::restart(){
     coronando = false;
     turno_stockfish = false;
     stockfish_activado = false;
+    emit reset();
 }
 
 std::string MyQWidget::mov(Pos orig, Pos nueva){

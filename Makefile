@@ -537,8 +537,7 @@ main.o: Code/main.cc Header/Tablero.hh \
 		Header/Dama.hh \
 		Header/Rei.hh \
 		Header/MyQWidget.hh \
-		ui_chess.h \
-		Header/Casilla.hh
+		ui_chess.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o Code/main.cc
 
 MyQWidget.o: Code/MyQWidget.cc Header/MyQWidget.hh \

@@ -37,6 +37,7 @@ class MyQWidget:public QWidget{
     signals:
         void enviar_color(char f, int c, QColor col);
         void enviar_imatge(char f, int c, QPixmap &i);
+        void reset();
 
 };
 #endif
