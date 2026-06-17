@@ -156,6 +156,13 @@ void MyQWidget::leer_datos_stockfish(){
             movimiento_stock = s.substr(9,5);
             recivir_Pos(movimiento_stock[0], movimiento_stock[1]-'0', true);
             recivir_Pos(movimiento_stock[2], movimiento_stock[3]-'0', true);
+            if(movimiento_stock[4]!=' '){
+                int mov = movimiento_stock[3]-movimiento_stock[1];
+                if(movimiento_stock[4]=='q')recivir_Pos(movimiento_stock[2], movimiento_stock[3]-'0', true);
+                else if (movimiento_stock[4]=='r' ) recivir_Pos(movimiento_stock[2], movimiento_stock[3]-'0'-mov, true);
+                else if (movimiento_stock[4]=='n' ) recivir_Pos(movimiento_stock[2], movimiento_stock[3]-'0'-2*mov, true);
+                else if (movimiento_stock[4]=='b' ) recivir_Pos(movimiento_stock[2], movimiento_stock[3]-'0'-3*mov, true);
+            }
             
         }
 
