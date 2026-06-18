@@ -19,8 +19,9 @@ class MyQWidget:public QWidget{
     
     private:
         Tablero t;
-        bool partida_acabada=false, coronando, turno_stockfish, stockfish_activado;
+        bool partida_acabada=false, coronando, turno_stockfish, stockfish_activado, creando;
         std::vector<std::string> movimientos;
+        std::vector<std::string> movimientos_antes_retroceso;
 
         std::string mov(Pos orig, Pos nueva);
         QProcess *stockfish;
@@ -33,11 +34,14 @@ class MyQWidget:public QWidget{
         void leer_datos_stockfish();
         void activar_persona();
         void activar_stockfish();
+        void retroceder_jugada();
+        void adelantar_jugada();
 
     signals:
         void enviar_color(char f, int c, QColor col);
         void enviar_imatge(char f, int c, QPixmap &i);
         void reset();
+        void enviar_stockfish();
 
 };
 #endif

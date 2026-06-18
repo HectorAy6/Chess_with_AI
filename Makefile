@@ -398,9 +398,11 @@ compiler_rcc_clean:
 qrc_resources.cpp: resources.qrc \
 		/usr/lib/qt5/bin/rcc \
 		Images/Alfil_B.png \
+		Images/retroceder.png \
 		Images/Alfil_N.png \
 		Images/Torre_B.png \
 		Images/Caballo_B.png \
+		Images/adelantar.png \
 		Images/Torre_N.png \
 		Images/Caballo_N.png \
 		Images/Dama_B.png \
@@ -537,7 +539,8 @@ main.o: Code/main.cc Header/Tablero.hh \
 		Header/Dama.hh \
 		Header/Rei.hh \
 		Header/MyQWidget.hh \
-		ui_chess.h
+		ui_chess.h \
+		Header/Casilla.hh
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o Code/main.cc
 
 MyQWidget.o: Code/MyQWidget.cc Header/MyQWidget.hh \

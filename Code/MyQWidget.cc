@@ -17,7 +17,10 @@ void MyQWidget::recivir_Pos(char f, int c, bool stock){
     if(res == TABLAS or res == JAQUE_MATE_B or res == JAQUE_MATE_N or res == RENDIRSE){
         partida_acabada = true;
         pintar_tablero();
-        
+        t.actualizar_posiciones();
+        Pos p1 = t.get_pieza_sel(), p2 = t.get_pieza_nueva();
+        movimientos.push_back(mov(p1,p2));
+        if(!creando) movimientos_antes_retroceso.clear();
         if(res == JAQUE_MATE_B){
             QMessageBox::information(this, "Fin de la partida", "Jaque mate. Ganan las blancas.");
         } else if(res == TABLAS){
@@ -34,6 +37,7 @@ void MyQWidget::recivir_Pos(char f, int c, bool stock){
         t.actualizar_posiciones();
         Pos p1 = t.get_pieza_sel(), p2 = t.get_pieza_nueva();
         movimientos.push_back(mov(p1,p2));
+        if(!creando) movimientos_antes_retroceso.clear();
         if(coronando){
             movimientos[movimientos.size()-1].push_back(t.print_pieza(p2.x, p2.y));
         }
@@ -140,6 +144,7 @@ void MyQWidget::restart(){
     turno_stockfish = false;
     stockfish_activado = false;
     emit reset();
+    creando = false;
 }
 
 std::string MyQWidget::mov(Pos orig, Pos nueva){
@@ -191,4 +196,64 @@ void MyQWidget::activar_persona(){
 void MyQWidget::activar_stockfish(){
     stockfish_activado = true;
     turno_stockfish = false;
+}
+
+void MyQWidget::retroceder_jugada(){
+    if(movimientos.empty()) return;
+    movimientos_antes_retroceso.push_back(movimientos.back());
+    movimientos.pop_back();
+    if(!movimientos.empty() and stockfish_activado){
+        movimientos_antes_retroceso.push_back(movimientos.back());
+        movimientos.pop_back();
+    };
+    bool sa = stockfish_activado;
+    std::vector<std::string> aux = movimientos;
+    restart();
+    creando = true;
+    for(auto s:aux) {
+        recivir_Pos(s[0], s[1]-'0', false);
+        recivir_Pos(s[2], s[3]-'0', false);
+        if(s.size()>4){
+            int mov = s[3]-s[1];
+            if(s[4]=='q')recivir_Pos(s[2], s[3]-'0', false);
+            else if (s[4]=='r' ) recivir_Pos(s[2], s[3]-'0'-mov, false);
+            else if (s[4]=='n' ) recivir_Pos(s[2], s[3]-'0'-2*mov, false);
+            else if (s[4]=='b' ) recivir_Pos(s[2], s[3]-'0'-3*mov, false);
+        }
+    }
+    creando = false;
+    stockfish_activado = sa;
+    if(sa) emit enviar_stockfish();
+
+}
+
+void MyQWidget::adelantar_jugada(){
+    if(movimientos_antes_retroceso.empty()) return;
+    std::string s = movimientos_antes_retroceso.back();
+    creando = true;
+    recivir_Pos(s[0], s[1]-'0', true);
+    recivir_Pos(s[2], s[3]-'0', true);
+    if(s.size()>4){
+        int mov = s[3]-s[1];
+        if(s[4]=='q')recivir_Pos(s[2], s[3]-'0', true);
+        else if (s[4]=='r' ) recivir_Pos(s[2], s[3]-'0'-mov, true);
+        else if (s[4]=='n' ) recivir_Pos(s[2], s[3]-'0'-2*mov, true);
+        else if (s[4]=='b' ) recivir_Pos(s[2], s[3]-'0'-3*mov, true);
+    }
+    movimientos_antes_retroceso.pop_back();
+    if(stockfish_activado){
+        s = movimientos_antes_retroceso.back();
+        recivir_Pos(s[0], s[1]-'0', true);
+        recivir_Pos(s[2], s[3]-'0', true);
+        if(s.size()>4){
+            int mov = s[3]-s[1];
+            if(s[4]=='q')recivir_Pos(s[2], s[3]-'0', true);
+            else if (s[4]=='r' ) recivir_Pos(s[2], s[3]-'0'-mov, true);
+            else if (s[4]=='n' ) recivir_Pos(s[2], s[3]-'0'-2*mov, true);
+            else if (s[4]=='b' ) recivir_Pos(s[2], s[3]-'0'-3*mov, true);
+        }
+        movimientos_antes_retroceso.pop_back();
+    }
+
+    creando = false;
 }
